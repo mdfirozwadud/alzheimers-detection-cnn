@@ -1,12 +1,8 @@
-# Alzheimer's Disease Detection using Deep Learning
-
-**Project Milestone 1: Data Acquisition and Preparation**
-
----
+# Alzheimer's Disease Detection - Milestone 1: Data Preparation
 
 ## Team Information
 
-**Team Name:** 
+**Team Name:** NeuroVision
 
 | Name | Neptune Code |
 |------|--------------|
@@ -16,126 +12,192 @@
 
 ---
 
-## Project Overview
+## Project Description
 
-Alzheimer's disease (AD) is a progressive neurodegenerative disorder that significantly impacts memory and cognitive abilities. Early detection is crucial for improving patient care and enabling timely medical intervention. This project explores the application of deep learning models for classifying Alzheimer's disease stages from MRI brain scans.
+This project applies deep learning techniques to classify Alzheimer's disease stages from MRI brain scans. The goal is to develop a model that can accurately categorize brain scans into four classes:
 
-### Objectives
-
-This milestone focuses on the foundational steps of our deep learning pipeline:
-
-1. **Data Acquisition**: Sourcing and downloading MRI datasets from reliable repositories
-2. **Data Exploration**: Analyzing dataset characteristics, distributions, and patterns
-3. **Data Preparation**: Preprocessing images and organizing data for model training
-4. **Dataset Splitting**: Creating properly balanced training, validation, and test sets
-
-### Classification Task
-
-Our model aims to classify MRI scans into four distinct categories:
 - **Non-Demented**: No signs of Alzheimer's disease
-- **Mild Demented**: Early stage of cognitive decline
-- **Moderate Demented**: Intermediate stage with noticeable symptoms
-- **Severe Demented**: Advanced stage with significant impairment
+- **Very Mild Demented**: Early stage cognitive decline
+- **Mild Demented**: Noticeable symptoms
+- **Moderate Demented**: Advanced stage with significant impairment
 
-### Dataset Sources
+**Milestone 1** focuses on data acquisition, exploration, preprocessing, and preparation for model training.
 
-We utilize a Kaggle datasets for this project:
+---
 
-1. **Primary Dataset**: [Alzheimer MRI 4-Classes Dataset](https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset)
+## Data Source
 
-**Baseline Framework**: We build upon the foundation provided by the [DL-Simplified Alzheimer's Detection Repository](https://github.com/abhisheks008/DL-Simplified/tree/main/Alzheimers%20Detection)
+### Primary Dataset
+- **Source**: [Kaggle - Alzheimer MRI 4-Classes Dataset](https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset)
+- **Download Method**: Using Kaggle API with authentication token
+- **Format**: MRI brain scan images organized by disease severity class
+- **Total Images**: 6,400 images across 4 classes
+
+### How Data Was Downloaded
+1. Dataset downloaded from Kaggle using their API
+2. Authentication via `kaggle.json` API token
+3. Automated extraction and organization into class-specific folders
+4. Dataset URL: `https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset`
 
 ---
 
 ## Repository Structure
-
 ```
 alzheimer-detection-milestone1/
 │
 ├── README.md                          # Project documentation
+├── Milestone_1.ipynb                  # Main notebook with complete workflow
 │
-├── Milesstone_1.ipynb
+├── visualization_outputs/             # Data exploration visualizations
 │
-└── data/
-    ├── raw/                          # Original downloaded datasets
-    ├── processed/                    # Preprocessed images
-    └── splits/                       # Train/validation/test splits
-
+└── processed_dataset/                 # Preprocessed data (download link below)
+    ├── train/                         # Training set (70%)
+    │   ├── MildDemented/
+    │   ├── ModerateDemented/
+    │   ├── NonDemented/
+    │   └── VeryMildDemented/
+    ├── val/                           # Validation set (20%)
+    │   ├── MildDemented/
+    │   ├── ModerateDemented/
+    │   ├── NonDemented/
+    │   └── VeryMildDemented/
+    └── test/                          # Test set (10%)
+        ├── MildDemented/
+        ├── ModerateDemented/
+        ├── NonDemented/
+        └── VeryMildDemented/
 ```
 
 ---
 
 ## File Descriptions
 
-### Notebooks
+### `Milestone_1.ipynb`
+Main Jupyter Notebook containing the complete Milestone 1 workflow:
+- **Data Acquisition**: Downloads dataset from Kaggle using API
+- **Data Exploration**: Visualizes class distributions, sample images, and statistics
+- **Data Preprocessing**: Resizes images to 176×176, converts to RGB, normalizes pixel values
+- **Dataset Splitting**: Splits data into train (70%), validation (20%), and test (10%) sets
+- **Data Export**: Creates downloadable preprocessed dataset
 
-**`milestone1_data_preparation.ipynb`**
-- Complete workflow for Milestone 1
-- Includes data acquisition, exploration, preprocessing, and splitting
-- Contains visualizations and statistical analysis
-- Outputs training, validation, and test datasets
+### `visualization_outputs/`
+Contains all generated visualizations:
+- Class distribution charts (before/after preprocessing)
+- Sample MRI images from each class
+- Heatmaps showing data balance
+- Comparison plots
 
-### Source Code Modules
-
-
-### Data Directory
-
--  **`data/raw/`**: Original MRI images organized by class
-- **`data/processed/`**: Preprocessed images ready for model training
-- **`data/splits/`**: Final train/validation/test datasets with associated labels
+### `processed_dataset/`
+Final preprocessed dataset ready for model training:
+- All images resized to 176×176 pixels
+- RGB format (3 channels)
+- Normalized pixel values (0-1 range)
+- Organized by train/val/test splits
+- Maintains class balance across splits
 
 ---
 
 ## How to Run the Solution
-1. Open the Milesstone_1.ipynb file in google colab or jupyter notebook
-2. Run the  Imports
-3. Run the Download dataset Section. Here the dataset will be downloaded from kaggle but you need to upoload a api tocke.
-4. how to get the api tocken 
- a.Go to https://www.kaggle.com and log in
-b.Click your profile picture (top right) → Settings
-c.Scroll to API section
-d.Click "Create New API Token"
-e.kaggle.json downloads automatically to your Downloads folder
-4. Then upload the kaggle.json file
-5. run the next blocks
 
+### Prerequisites
+- Google Colab (recommended) or Jupyter Notebook
+- Kaggle account and API token
+
+### Step-by-Step Instructions
+
+1. **Open the Notebook**
+```
+   File: Milestone_1.ipynb
+   Platform: Google Colab or Jupyter Notebook
+```
+
+2. **Get Kaggle API Token**
+   - Go to [https://www.kaggle.com](https://www.kaggle.com) and log in
+   - Click your profile picture (top right) → **Settings**
+   - Scroll to **API** section
+   - Click **"Create New API Token"**
+   - `kaggle.json` will download to your computer
+
+3. **Upload API Token**
+   - In the notebook, run the cell that prompts for file upload
+   - Upload your `kaggle.json` file
+
+4. **Run All Cells**
+   - Execute cells sequentially from top to bottom
+   - The notebook will:
+     - Download the dataset from Kaggle
+     - Perform data exploration and visualization
+     - Preprocess all images
+     - Split into train/val/test sets
+     - Generate downloadable preprocessed dataset
+
+5. **Download Preprocessed Dataset**
+   - After completion, the notebook will automatically download `preprocessed_dataset.zip`
+   - This contains all training, validation, and test data ready for modeling
 
 
 ---
 
-## Milestone 1 Deliverables
+## Milestone 1 Outputs
 
-Upon successful execution, this notebook produces:
+### 1. Training Data
+- **Location**: `processed_dataset/train/`
+- **Size**: 70% of total dataset (~4,480 images)
+- **Format**: 176×176 RGB images, normalized (0-1)
+- **Classes**: 4 disease severity categories
 
-1. **Downloaded Datasets**: Raw MRI images from Kaggle sources
-2. **Exploratory Analysis**: 
-   - Class distribution charts
-   - Sample images from each category
-   - Statistical summaries
-3. **Preprocessed Data**: 
-   - Resized and normalized images
-   - Consistent format across all samples
-4. **Dataset Splits**:
-   - Training set (70% of data)
-   - Validation set (20% of data)
-   - Test set (10% of data)
-   - All splits maintain class balance
+### 2. Validation Data
+- **Location**: `processed_dataset/val/`
+- **Size**: 20% of total dataset (~1,280 images)
+- **Format**: Same as training data
+- **Purpose**: Model hyperparameter tuning
 
-### Output Files
-Preprocessed dataset
-notebook file
-readme
+### 3. Test Data
+- **Location**: `processed_dataset/test/`
+- **Size**: 10% of total dataset (~640 images)
+- **Format**: Same as training data
+- **Purpose**: Final model evaluation
+
+### 4. Visualizations
+- Class distribution plots (before/after preprocessing)
+- Sample images from each disease category
+- Statistical summaries and heatmaps
+- All saved in `visualization_outputs/` folder
+
+---
+
+## Data Exploration Summary
+
+### Preprocessing Details
+- **Original Format**: Various sizes, grayscale/RGB
+- **Final Format**: 176×176 pixels, RGB (3 channels)
+- **Normalization**: Pixel values scaled to [0, 1] range
+- **Split Ratio**: 70% train / 20% validation / 10% test
+- **Random Seed**: 42 (for reproducibility)
+
+### Key Statistics
+- **Total Images**: 6,400
+- **Training Set**: ~4,480 images
+- **Validation Set**: ~1,280 images
+- **Test Set**: ~640 images
+- **Image Dimensions**: 176 × 176 × 3
+- **Classes**: NonDemented, VeryMildDemented, MildDemented, ModerateDemented
+
 
 ---
 
 ## References
 
-- Baseline Repository: [DL-Simplified Alzheimer's Detection](https://github.com/abhisheks008/DL-Simplified/tree/main/Alzheimers%20Detection)
-- Dataset 1: [Kaggle - Alzheimer MRI 4-Classes](https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset)
-- Dataset 2: [Kaggle - Alzheimer's Dataset 4 Classes](https://www.kaggle.com/datasets/preetpalsingh25/alzheimers-dataset-4-class-of-images)
+- **Dataset**: [Alzheimer MRI 4-Classes Dataset - Kaggle](https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset)
+- **Baseline**: [DL-Simplified Alzheimer's Detection](https://github.com/abhisheks008/DL-Simplified/tree/main/Alzheimers%20Detection)
 
 ---
 
-**Course**: Deep Learning  
-**Institution**: Budapest Institute of Technology and Economics 
-**Submission Date**: October 20, 2025  
+## Course Information
+
+-**Course**: Deep Learning  
+-**Instructor**: Al-Radhi Mohammed Salah Hamza  
+-**Institution**: Budapest University of Technology and Economics (BME)    
+-**Submission Date**: October 20, 2025    
+
+---

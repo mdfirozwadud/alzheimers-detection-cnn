@@ -39,10 +39,9 @@ Our model aims to classify MRI scans into four distinct categories:
 
 ### Dataset Sources
 
-We utilize two complementary Kaggle datasets for this project:
+We utilize a Kaggle datasets for this project:
 
 1. **Primary Dataset**: [Alzheimer MRI 4-Classes Dataset](https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset)
-2. **Secondary Dataset**: [Alzheimer's Dataset - 4 Class of Images](https://www.kaggle.com/datasets/preetpalsingh25/alzheimers-dataset-4-class-of-images)
 
 **Baseline Framework**: We build upon the foundation provided by the [DL-Simplified Alzheimer's Detection Repository](https://github.com/abhisheks008/DL-Simplified/tree/main/Alzheimers%20Detection)
 
@@ -54,10 +53,8 @@ We utilize two complementary Kaggle datasets for this project:
 alzheimer-detection-milestone1/
 │
 ├── README.md                          # Project documentation
-├── requirements.txt                   # Python dependencies
 │
-├── notebooks/
-│   └── milestone1_data_preparation.ipynb    # Main notebook for this milestone
+├── Milesstone_1.ipynb
 │
 └── data/
     ├── raw/                          # Original downloaded datasets
@@ -90,6 +87,17 @@ alzheimer-detection-milestone1/
 ---
 
 ## How to Run the Solution
+1. Open the Milesstone_1.ipynb file in google colab or jupyter notebook
+2. Run the  Imports
+3. Run the Download dataset Section. Here the dataset will be downloaded from kaggle but you need to upoload a api tocke.
+4. how to get the api tocken 
+ a.Go to https://www.kaggle.com and log in
+b.Click your profile picture (top right) → Settings
+c.Scroll to API section
+d.Click "Create New API Token"
+e.kaggle.json downloads automatically to your Downloads folder
+4. Then upload the kaggle.json file
+5. run the next blocks
 
 
 
@@ -109,15 +117,14 @@ Upon successful execution, this notebook produces:
    - Consistent format across all samples
 4. **Dataset Splits**:
    - Training set (70% of data)
-   - Validation set (15% of data)
-   - Test set (15% of data)
+   - Validation set (20% of data)
+   - Test set (10% of data)
    - All splits maintain class balance
 
 ### Output Files
-
-- `data/splits/train/` - Training images
-- `data/splits/val/` - Validation images
-- `data/splits/test/` - Test images
+Preprocessed dataset
+notebook file
+readme
 
 ---
 

@@ -85,7 +85,7 @@ Main Jupyter Notebook containing the complete Milestone 1 workflow:
 - **Dataset Splitting**: Splits data into train (70%), validation (20%), and test (10%) sets
 - **Data Export**: Creates downloadable preprocessed dataset
 
-**`Milestone_2.ipynb`**
+### `Milestone_2.ipynb`
 Milestone_1 + Baseline and deep learning model training and evaluation:
 
 Baseline model implementation using Logistic Regression:

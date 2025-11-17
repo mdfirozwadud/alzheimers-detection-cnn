@@ -85,6 +85,26 @@ Main Jupyter Notebook containing the complete Milestone 1 workflow:
 - **Dataset Splitting**: Splits data into train (70%), validation (20%), and test (10%) sets
 - **Data Export**: Creates downloadable preprocessed dataset
 
+**`Milestone_2.ipynb`**
+Milestone_1 + Baseline and deep learning model training and evaluation:
+
+Baseline model implementation using Logistic Regression:
+- **Data Loading**: Loads preprocessed train/val/test datasets using ImageDataGenerator
+- **Feature Extraction**: Flattens 176×176×3 images into 92,928-dimensional feature vectors
+- **Feature Scaling**: Standardizes features using StandardScaler for improved convergence
+- **Model Training**: Trains multinomial Logistic Regression classifier with LBFGS solver
+- **Evaluation**: Generates confusion matrix, classification report, and ROC curves
+- **Model Export**: Saves trained baseline model and scaler as pickle files
+
+Deep neural network implementation for Alzheimer's classification:
+- **Data Augmentation**: Applies rotation, shifting, flipping, and zoom transformations to training data
+- **Model Architecture**: Implements fully connected neural network with 5 hidden layers (100-200-200-200-200 neurons)
+- **Training Configuration**: Uses Adam optimizer, categorical cross-entropy loss, early stopping (patience=10)
+- **Multi-Metric Tracking**: Monitors accuracy, AUC, precision, and recall during training
+- **Evaluation**: Generates confusion matrix, classification report, and ROC curves
+- **Training History**: Visualizes loss and accuracy curves across epochs
+
+
 ### `visualization_outputs/`
 Contains all generated visualizations:
 - Class distribution charts (before/after preprocessing)

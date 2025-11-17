@@ -47,6 +47,7 @@ alzheimer-detection-milestone1/
 │
 ├── README.md                          # Project documentation
 ├── Milestone_1.ipynb                  # Main notebook with complete workflow
+├── Milestone_2.ipynb                  # Main notebook with complete workflow
 ├── visualization_outputs/             # Data exploration visualizations
 ├──Alzheimer_MRI_4_classes_dataset/    # Original Dataset From Kaggle
 │   ├── MildDemented/

@@ -1,4 +1,4 @@
-# Alzheimer's Disease Detection - Milestone 1: Data Preparation
+# Alzheimer's Disease Detection - Deep Learning Project
 
 ## Team Information
 
@@ -21,7 +21,7 @@ This project applies deep learning techniques to classify Alzheimer's disease st
 - **Mild Demented**: Noticeable symptoms
 - **Moderate Demented**: Advanced stage with significant impairment
 
-**Milestone 1** focuses on data acquisition, exploration, preprocessing, and preparation for model training.
+The project includes complete data preparation, baseline model implementation, custom CNN architecture development, transfer learning experiments, and comprehensive evaluation.
 
 ---
 
@@ -43,19 +43,21 @@ This project applies deep learning techniques to classify Alzheimer's disease st
 
 ## Repository Structure
 ```
-alzheimer-detection-milestone1/
+alzheimer-detection/
 │
 ├── README.md                          # Project documentation
-├── Milestone_1.ipynb                  # Main notebook with complete workflow
-├── Milestone_2.ipynb                  # Main notebook with complete workflow
+├── documentation.pdf                  # Final project report (6-7 pages)
+├── Final_Version.ipynb                # Complete project notebook
+├── Milestone_1.ipynb                  # Data preparation workflow
+├── Milestone_2.ipynb                  # Baseline models workflow
 ├── visualization_outputs/             # Data exploration visualizations
-├──Alzheimer_MRI_4_classes_dataset/    # Original Dataset From Kaggle
+├── Alzheimer_MRI_4_classes_dataset/   # Original Dataset From Kaggle
 │   ├── MildDemented/
 │   ├── ModerateDemented/
 │   ├── NonDemented/
 │   └── VeryMildDemented/   
 │
-└── processed_dataset/                 # Preprocessed data (download link below)
+└── processed_dataset/                 # Preprocessed data
     ├── train/                         # Training set (70%)
     │   ├── MildDemented/
     │   ├── ModerateDemented/
@@ -77,8 +79,27 @@ alzheimer-detection-milestone1/
 
 ## File Descriptions
 
+### `documentation.pdf`
+**Final project report (6-7 pages)** containing:
+- **Introduction**: Overview of Alzheimer's disease detection, challenges with class imbalance, and project objectives
+- **Methods**: Detailed description of NeuroVision V1 (custom CNN) and VGG16 transfer learning architectures, training configuration, and hyperparameter optimization
+- **Evaluation**: Comprehensive results on test data with visualizations including training/validation curves, confusion matrix, ROC curves, and baseline comparisons
+- **Conclusions**: Main findings showing 97.15% accuracy with custom CNN, effectiveness of class weighting strategy, and practical implications
+
+### `Final_Version.ipynb`
+**Complete end-to-end project implementation** including:
+- Data acquisition and preprocessing pipeline
+- Exploratory data analysis with visualizations
+- Baseline model implementation (Logistic Regression and Simple ANN)
+- **NeuroVision V1**: Custom CNN architecture with SeparableConv2D layers and progressive dropout
+- **VGG16 Transfer Learning**: Pre-trained model with custom classification head
+- Training with class weighting, label smoothing, and learning rate scheduling
+- Comprehensive evaluation with confusion matrices, ROC curves, and performance metrics
+- Weights & Biases integration for experiment tracking
+- Final model performance: 97.15% accuracy, 0.9987 AUC
+
 ### `Milestone_1.ipynb`
-Main Jupyter Notebook containing the complete Milestone 1 workflow:
+Data preparation notebook containing:
 - **Data Acquisition**: Downloads dataset from Kaggle using API
 - **Data Exploration**: Visualizes class distributions, sample images, and statistics
 - **Data Preprocessing**: Resizes images to 176×176, converts to RGB, normalizes pixel values
@@ -86,31 +107,28 @@ Main Jupyter Notebook containing the complete Milestone 1 workflow:
 - **Data Export**: Creates downloadable preprocessed dataset
 
 ### `Milestone_2.ipynb`
-Milestone_1 + Baseline and deep learning model training and evaluation:
+Baseline model development notebook including:
 
-Baseline model implementation using Logistic Regression:
-- **Data Loading**: Loads preprocessed train/val/test datasets using ImageDataGenerator
-- **Feature Extraction**: Flattens 176×176×3 images into 92,928-dimensional feature vectors
-- **Feature Scaling**: Standardizes features using StandardScaler for improved convergence
-- **Model Training**: Trains multinomial Logistic Regression classifier with LBFGS solver
-- **Evaluation**: Generates confusion matrix, classification report, and ROC curves
-- **Model Export**: Saves trained baseline model and scaler as pickle files
+**Baseline Logistic Regression**:
+- Feature extraction by flattening 176×176×3 images
+- Feature scaling with StandardScaler
+- Multinomial Logistic Regression training
+- Achieved 92.44% test accuracy
 
-Deep neural network implementation for Alzheimer's classification:
-- **Data Augmentation**: Applies rotation, shifting, flipping, and zoom transformations to training data
-- **Model Architecture**: Implements fully connected neural network with 5 hidden layers (100-200-200-200-200 neurons)
-- **Training Configuration**: Uses Adam optimizer, categorical cross-entropy loss, early stopping (patience=10)
-- **Multi-Metric Tracking**: Monitors accuracy, AUC, precision, and recall during training
-- **Evaluation**: Generates confusion matrix, classification report, and ROC curves
-- **Training History**: Visualizes loss and accuracy curves across epochs
-
+**Baseline Neural Network**:
+- Fully connected architecture with 5 hidden layers
+- Data augmentation (rotation, shifting, flipping, zoom)
+- Early stopping and multiple metrics tracking
+- Confusion matrix and ROC curve generation
 
 ### `visualization_outputs/`
 Contains all generated visualizations:
 - Class distribution charts (before/after preprocessing)
 - Sample MRI images from each class
+- Training and validation loss/AUC curves
+- Confusion matrices for all models
+- ROC curves comparison
 - Heatmaps showing data balance
-- Comparison plots
 
 ### `processed_dataset/`
 Final preprocessed dataset ready for model training:
@@ -127,102 +145,150 @@ Final preprocessed dataset ready for model training:
 ### Prerequisites
 - Google Colab (recommended) or Jupyter Notebook
 - Kaggle account and API token
+- Python 3.7+ with TensorFlow 2.x
 
-### Step-by-Step Instructions
+### Quick Start with Final Version
 
-1. **Open the Notebook**
-```
-   File: Milestone_1.ipynb
-   Platform: Google Colab or Jupyter Notebook
-```
+1. **Open Final_Version.ipynb**
+   - Upload to Google Colab or open in Jupyter Notebook
+   - This contains the complete project implementation
 
 2. **Get Kaggle API Token**
    - Go to [https://www.kaggle.com](https://www.kaggle.com) and log in
-   - Click your profile picture (top right) → **Settings**
-   - Scroll to **API** section
+   - Click your profile picture → **Settings** → **API** section
    - Click **"Create New API Token"**
    - `kaggle.json` will download to your computer
 
 3. **Upload API Token**
-   - In the notebook, run the cell that prompts for file upload
+   - Run the cell that prompts for file upload
    - Upload your `kaggle.json` file
 
 4. **Run All Cells**
    - Execute cells sequentially from top to bottom
-   - The notebook will:
-     - Download the dataset from Kaggle
-     - Perform data exploration and visualization
-     - Preprocess all images
-     - Split into train/val/test sets
-     - Generate downloadable preprocessed dataset
+   - The notebook will automatically:
+     - Download and preprocess the dataset
+     - Train baseline models for comparison
+     - Train NeuroVision V1 (custom CNN)
+     - Train VGG16 transfer learning model
+     - Generate all evaluation metrics and visualizations
+     - Track experiments with Weights & Biases
 
-5. **Download Preprocessed Dataset**
-   - After completion, the notebook will automatically download `preprocessed_dataset.zip`
-   - This contains all training, validation, and test data ready for modeling
+5. **View Results**
+   - Training curves, confusion matrices, and ROC curves will be displayed
+   - Final test accuracy and per-class metrics will be shown
+   - Best model weights will be saved
 
+### Step-by-Step Milestones
 
----
+**For Milestone 1** (Data Preparation):
+- Run `Milestone_1.ipynb` for data acquisition and preprocessing only
 
-## Milestone 1 Outputs
+**For Milestone 2** (Baseline Models):
+- Run `Milestone_2.ipynb` for baseline Logistic Regression and ANN models
 
-### 1. Training Data
-- **Location**: `processed_dataset/train/`
-- **Size**: 70% of total dataset (~4,480 images)
-- **Format**: 176×176 RGB images, normalized (0-1)
-- **Classes**: 4 disease severity categories
-
-### 2. Validation Data
-- **Location**: `processed_dataset/val/`
-- **Size**: 20% of total dataset (~1,280 images)
-- **Format**: Same as training data
-- **Purpose**: Model hyperparameter tuning
-
-### 3. Test Data
-- **Location**: `processed_dataset/test/`
-- **Size**: 10% of total dataset (~640 images)
-- **Format**: Same as training data
-- **Purpose**: Final model evaluation
-
-### 4. Visualizations
-- Class distribution plots (before/after preprocessing)
-- Sample images from each disease category
-- Statistical summaries and heatmaps
-- All saved in `visualization_outputs/` folder
+**For Final Submission** (Complete Project):
+- Run `Final_Version.ipynb` for the full implementation with advanced models
 
 ---
 
-## Data Exploration Summary
+## Project Results
 
-### Preprocessing Details
+### Model Performance Summary
+
+| Model | Test Accuracy | Macro F1 | AUC | Parameters |
+|-------|--------------|----------|-----|------------|
+| **NeuroVision V1 (Custom CNN)** | **97.15%** | 0.9435 | **0.9987** | 1.2M |
+| VGG16 Transfer Learning | N/A | N/A | 0.9803 | 15.1M |
+| Logistic Regression (Baseline) | 92.44% | 0.90 | N/A | N/A |
+| Simple ANN (Baseline) | 52.00% | 0.26 | N/A | N/A |
+
+### NeuroVision V1 Per-Class Performance
+
+| Class | Precision | Recall | F1-Score | AUC | Test Samples |
+|-------|-----------|--------|----------|-----|--------------|
+| Mild Demented | 0.9524 | 0.9929 | 0.9722 | 0.9999 | 141 |
+| Moderate Demented | 0.9000 | 0.8182 | 0.8571 | 0.9929 | 11 |
+| Non-Demented | 0.9899 | 0.9609 | 0.9752 | 0.9916 | 511 |
+| Very Mild Demented | 0.9562 | 0.9831 | 0.9694 | 0.9899 | 355 |
+
+### Key Achievements
+- **97.15% accuracy** on test set with custom CNN architecture
+- Successfully handled severe class imbalance (Moderate Demented: only 11 test samples)
+- **0.9987 AUC** indicating near-perfect discrimination
+- Achieved 0.8571 F1-score on rarest class (Moderate Demented)
+- Outperformed all baseline models significantly (+45% over simple ANN, +5% over Logistic Regression)
+- Efficient model with only 1.2M parameters
+
+---
+
+## Technical Details
+
+### Data Preprocessing
 - **Original Format**: Various sizes, grayscale/RGB
 - **Final Format**: 176×176 pixels, RGB (3 channels)
 - **Normalization**: Pixel values scaled to [0, 1] range
 - **Split Ratio**: 70% train / 20% validation / 10% test
-- **Random Seed**: 42 (for reproducibility)
+- **Class Weighting**: Applied to handle imbalance (Moderate: 5.0, Mild: 2.0, Very Mild: 1.3, Non: 1.0)
 
-### Key Statistics
+### NeuroVision V1 Architecture
+- **Input**: 208×176×3 (adjusted for better aspect ratio preservation)
+- **Feature Extraction**: 
+  - Initial Conv2D blocks (16 filters)
+  - 4 SeparableConv2D blocks (32→64→128→256 filters)
+  - Batch Normalization after each block
+  - Max pooling for spatial reduction
+- **Classification Head**: 
+  - Dense layers: 512→128→64 units
+  - Progressive dropout: 0.7→0.5→0.3
+  - ELU activation throughout
+- **Output**: 4-way softmax classification
+
+### Training Configuration
+- **Optimizer**: Adam (lr=3×10⁻⁴ for custom CNN, lr=1×10⁻⁴ for transfer learning)
+- **Loss**: Categorical cross-entropy with label smoothing (ε=0.15)
+- **Regularization**: Gradient clipping (clipnorm=0.5), dropout, batch normalization
+- **Callbacks**: ReduceLROnPlateau (factor=0.8, patience=10), EarlyStopping (patience=20)
+- **Batch Size**: 32
+- **Epochs**: 50 (with early stopping)
+- **Primary Metric**: AUC (robust to class imbalance)
+
+---
+
+## Key Statistics
 - **Total Images**: 6,400
-- **Training Set**: ~4,480 images
-- **Validation Set**: ~1,280 images
-- **Test Set**: ~640 images
-- **Image Dimensions**: 176 × 176 × 3
-- **Classes**: NonDemented, VeryMildDemented, MildDemented, ModerateDemented
-
+- **Training Set**: 4,480 images (70%)
+- **Validation Set**: 1,280 images (20%)
+- **Test Set**: 1,018 images (10%)
+- **Image Dimensions**: 208 × 176 × 3 (final), 176 × 176 × 3 (milestones)
+- **Classes**: NonDemented (50.2%), VeryMildDemented (34.9%), MildDemented (13.8%), ModerateDemented (1.1%)
 
 ---
 
 ## References
 
 - **Dataset**: [Alzheimer MRI 4-Classes Dataset - Kaggle](https://www.kaggle.com/datasets/marcopinamonti/alzheimer-mri-4-classes-dataset)
-- **Baseline**: [DL-Simplified Alzheimer's Detection](https://github.com/abhisheks008/DL-Simplified/tree/main/Alzheimers%20Detection)
+- **Baseline Reference**: [DL-Simplified Alzheimer's Detection](https://github.com/abhisheks008/DL-Simplified/tree/main/Alzheimers%20Detection)
+- **Key Papers**:
+  - Litjens et al., "A survey on deep learning in medical image analysis," Medical Image Analysis, 2017
+  - Chollet, "Xception: Deep Learning with Depthwise Separable Convolutions," CVPR, 2017
+  - Simonyan & Zisserman, "Very Deep Convolutional Networks for Large-Scale Image Recognition," ICLR, 2015
 
 ---
 
 ## Course Information
 
--**Course**: Deep Learning  
--**Instructor**: Al-Radhi Mohammed Salah Hamza  
--**Institution**: Budapest University of Technology and Economics (BME)    
--**Submission Date**: October 20, 2025    
+- **Course**: Deep Learning  
+- **Instructor**: Al-Radhi Mohammed Salah Hamza  
+- **Institution**: Budapest University of Technology and Economics (BME)    
+- **Submission Date**: December 2024    
+
+---
+
+## Acknowledgments
+
+We would like to thank:
+- Marco Pinamonti for providing the Alzheimer's MRI dataset on Kaggle
+- Our course instructor for guidance and support throughout the project
+- The deep learning community for open-source tools and resources
 
 ---
